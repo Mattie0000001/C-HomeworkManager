@@ -44,7 +44,7 @@ QString Administrator::getCurrentID() // 获取选中的ID
 void Administrator::refresh(QString table) // 刷新表格
 {
     QList<QStringList> tableData;
-    tableData = m_pCreateDB->selectDataFromBase(table);
+    tableData = m_pCreateDB->select_all(table);
     if(!tableData.isEmpty())
     {
         m_pTableWidget->clearTableData(); // 清除表格数据

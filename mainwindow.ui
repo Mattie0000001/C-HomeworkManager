@@ -118,35 +118,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="Btn_register">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>250</y>
-      <width>121</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;
-background: rgb(0, 0, 127);
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Register</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Btn_login">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>250</y>
+      <x>390</x>
+      <y>260</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -173,7 +149,7 @@ color: white;</string>
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>33</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>

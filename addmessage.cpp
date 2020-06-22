@@ -33,7 +33,7 @@ void AddMessage::on_OK_clicked()
     stuInfo.insert("password", password);
 
     // 发送信号
-    emit signalStuInfo(stuInfo);
+//    emit signalStuInfo(stuInfo);
 
     // 完成后，add message 弹窗关闭
     this->hide();

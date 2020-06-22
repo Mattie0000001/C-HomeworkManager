@@ -9,6 +9,8 @@
 #include <QList>
 #include <QStringList>
 #include <QSqlDatabase>
+#include <QSqlRecord>
+#include <QDebug>
 #include <QSqlQuery>
 
 class CreateDb
@@ -16,9 +18,11 @@ class CreateDb
 public:
     CreateDb(); // 构造函数
 
-    void initDB(); // 初始化数据库
+    void connectDB(); // 连接数据库
 
-    QList<QStringList> selectDataFromBase(QString); // 从数据库的指定表里选择数据
+    QString select_data(QString table, QString limit_info); // 从指定表中选择限定范围数据
+
+    QList<QStringList> select_all(QString table); // 从指定表里选择全部数据
 
 private:
     QString hostName; // 主机名

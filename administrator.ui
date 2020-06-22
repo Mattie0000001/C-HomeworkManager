@@ -32,6 +32,11 @@
      <height>34</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 10px;
+background: rgb(0, 0, 127);
+color: white;</string>
+   </property>
    <property name="text">
     <string>add</string>
    </property>
@@ -44,6 +49,11 @@
      <width>112</width>
      <height>34</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 10px;
+background: rgb(0, 0, 127);
+color: white;</string>
    </property>
    <property name="text">
     <string>delete</string>
