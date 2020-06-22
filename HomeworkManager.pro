@@ -18,20 +18,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addmessage.cpp \
+    addstu.cpp \
+    addtea.cpp \
     administrator.cpp \
     createDB.cpp \
     main.cpp \
     mainwindow.cpp \
 
 HEADERS += \
-    addmessage.h \
+    addstu.h \
+    addtea.h \
     administrator.h \
     createDB.h \
     mainwindow.h \
 
 FORMS += \
-    addmessage.ui \
+    addstu.ui \
+    addtea.ui \
     administrator.ui \
     mainwindow.ui \
 

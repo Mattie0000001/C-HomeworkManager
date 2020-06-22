@@ -1,0 +1,12 @@
+INPUT(
+./release\addstu.o
+./release\addtea.o
+./release\administrator.o
+./release\createDB.o
+./release\main.o
+./release\mainwindow.o
+./release\moc_addstu.o
+./release\moc_addtea.o
+./release\moc_administrator.o
+./release\moc_mainwindow.o
+);

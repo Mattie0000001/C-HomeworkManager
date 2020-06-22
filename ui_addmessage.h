@@ -28,8 +28,8 @@ public:
     QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
-    QPushButton *addStuOK;
-    QPushButton *addStuCancel;
+    QPushButton *OK;
+    QPushButton *Cancel;
     QLineEdit *stuName;
     QLineEdit *classID;
     QLineEdit *stuID;
@@ -56,12 +56,18 @@ public:
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(170, 320, 111, 51));
         label_4->setStyleSheet(QStringLiteral("font: 16pt \"Agency FB\";"));
-        addStuOK = new QPushButton(AddMessage);
-        addStuOK->setObjectName(QStringLiteral("addStuOK"));
-        addStuOK->setGeometry(QRect(190, 420, 121, 51));
-        addStuCancel = new QPushButton(AddMessage);
-        addStuCancel->setObjectName(QStringLiteral("addStuCancel"));
-        addStuCancel->setGeometry(QRect(460, 420, 131, 51));
+        OK = new QPushButton(AddMessage);
+        OK->setObjectName(QStringLiteral("OK"));
+        OK->setGeometry(QRect(190, 420, 121, 51));
+        OK->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        Cancel = new QPushButton(AddMessage);
+        Cancel->setObjectName(QStringLiteral("Cancel"));
+        Cancel->setGeometry(QRect(460, 420, 131, 51));
+        Cancel->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
         stuName = new QLineEdit(AddMessage);
         stuName->setObjectName(QStringLiteral("stuName"));
         stuName->setGeometry(QRect(350, 40, 301, 41));
@@ -74,6 +80,11 @@ public:
         password = new QLineEdit(AddMessage);
         password->setObjectName(QStringLiteral("password"));
         password->setGeometry(QRect(350, 330, 301, 41));
+        QWidget::setTabOrder(stuName, classID);
+        QWidget::setTabOrder(classID, stuID);
+        QWidget::setTabOrder(stuID, password);
+        QWidget::setTabOrder(password, OK);
+        QWidget::setTabOrder(OK, Cancel);
 
         retranslateUi(AddMessage);
 
@@ -83,12 +94,12 @@ public:
     void retranslateUi(QWidget *AddMessage)
     {
         AddMessage->setWindowTitle(QApplication::translate("AddMessage", "Form", Q_NULLPTR));
-        label->setText(QApplication::translate("AddMessage", "\345\247\223\345\220\215", Q_NULLPTR));
-        label_2->setText(QApplication::translate("AddMessage", "\347\217\255\347\272\247", Q_NULLPTR));
-        label_3->setText(QApplication::translate("AddMessage", "\345\255\246\345\217\267", Q_NULLPTR));
-        label_4->setText(QApplication::translate("AddMessage", "\345\257\206\347\240\201", Q_NULLPTR));
-        addStuOK->setText(QApplication::translate("AddMessage", "\347\241\256\345\256\232", Q_NULLPTR));
-        addStuCancel->setText(QApplication::translate("AddMessage", "\345\217\226\346\266\210", Q_NULLPTR));
+        label->setText(QApplication::translate("AddMessage", "Name", Q_NULLPTR));
+        label_2->setText(QApplication::translate("AddMessage", "Class", Q_NULLPTR));
+        label_3->setText(QApplication::translate("AddMessage", "ID", Q_NULLPTR));
+        label_4->setText(QApplication::translate("AddMessage", "Password", Q_NULLPTR));
+        OK->setText(QApplication::translate("AddMessage", "finsh", Q_NULLPTR));
+        Cancel->setText(QApplication::translate("AddMessage", "cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

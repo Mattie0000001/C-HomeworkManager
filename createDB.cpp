@@ -41,6 +41,7 @@ QString CreateDb::select_data(QString table, QString limit_info)
     // 查询准备
     QString select_sql = QString("select * from %1 where %2").arg(table, limit_info);
     qDebug() << "select_sql" << select_sql;
+
     QSqlQuery query(select_sql);
 
     QString rec_value;
@@ -48,7 +49,7 @@ QString CreateDb::select_data(QString table, QString limit_info)
     // 查询执行
     while (query.next()) {
         QSqlRecord rec = query.record(); // rec即查询结果
-        int rec_index = rec.indexOf("password"); //rec在第几行
+        int rec_index = rec.indexOf("password"); //rec在第几列
         rec_value = query.value(rec_index).toString();
 
         qDebug() << "record" << rec;

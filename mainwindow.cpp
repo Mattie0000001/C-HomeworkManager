@@ -56,17 +56,6 @@ void MainWindow::on_Btn_login_clicked()
             QMessageBox::information(this, "提示", "密码错误！", QMessageBox::Ok);
         }
     }
-
-    // 这一段都是测试用的
-    qDebug() << "-----------------test------------------------";
-    QString sqll = QString("select * from admin where id = 3");
-    qDebug() << "sql" << sqll;
-    QSqlQuery query(sqll);
-    while (query.next()) {
-        qDebug() <<"" << query.record();
-    }
-    qDebug() << "------------------test-----------------------";
-
 }
 
 void MainWindow::openUI () {

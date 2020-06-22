@@ -8,7 +8,9 @@
 #include <QWidget>
 #include <QVector>
 #include <QTableWidget>
-#include "addmessage.h"
+
+#include "addstu.h"
+#include "addtea.h"
 #include "ui_administrator.h"
 #include "createDB.h"
 
@@ -24,31 +26,27 @@ public:
     explicit Administrator(QWidget *parent = nullptr);
     ~Administrator();
 
-    QString getCurrentID(); // 获得当前数据的ID
-
-    void refresh(QString); //刷新数据
-
-    void clearTableData(); // 清楚表格内容
-
-    void appendRowData(QStringList rowData); // 增加一行数据
-
 private:
     Ui::Administrator *ui;
 
-    Administrator *m_pTableWidget;
-
-    CreateDb *m_pCreateDB;
-
-    AddMessage *addmessage;
+    Administrator *p_administrator;
+    CreateDb *p_database;
+    AddStu *p_addstu;
+    AddTea *p_addtea;
 
 private slots:
-    void on_Add_clicked(); // 添加按钮槽函数
+    // 数据库有关
+    void delete_account(QString); // 删除账户信息
+    void refresh(QString); // 刷新表格数据
 
-    void on_Delete_clicked(); // 删除按钮槽函数
+    // 按钮槽函数
+    void on_tea_add_clicked();
+    void on_tea_delete_clicked();
+    void on_tea_refresh_clicked();
 
-    void ExecAddSql(QVariantMap); // 向数据库中添加数据
-
-    void ExecDelSql(QString); // 向数据库中删除数据
+    void on_stu_add_clicked();
+    void on_stu_delete_clicked();
+    void on_stu_refresh_clicked();
 };
 
 #endif // ADMINISTRATOR_H

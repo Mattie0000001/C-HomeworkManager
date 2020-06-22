@@ -1,0 +1,12 @@
+INPUT(
+./debug\addstu.o
+./debug\addtea.o
+./debug\administrator.o
+./debug\createDB.o
+./debug\main.o
+./debug\mainwindow.o
+./debug\moc_addstu.o
+./debug\moc_addtea.o
+./debug\moc_administrator.o
+./debug\moc_mainwindow.o
+);

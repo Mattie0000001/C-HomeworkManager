@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
@@ -23,26 +24,140 @@ QT_BEGIN_NAMESPACE
 class Ui_Administrator
 {
 public:
-    QTableWidget *tableWidget;
-    QPushButton *Add;
-    QPushButton *Delete;
+    QTabWidget *tabWidget;
+    QWidget *tea;
+    QTableWidget *table_tea;
+    QPushButton *tea_add;
+    QPushButton *tea_refresh;
+    QPushButton *tea_delete;
+    QWidget *stu;
+    QTableWidget *table_stu;
+    QPushButton *stu_delete;
+    QPushButton *stu_add;
+    QPushButton *stu_refresh;
 
     void setupUi(QWidget *Administrator)
     {
         if (Administrator->objectName().isEmpty())
             Administrator->setObjectName(QStringLiteral("Administrator"));
         Administrator->resize(840, 602);
-        tableWidget = new QTableWidget(Administrator);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(0, 80, 851, 531));
-        Add = new QPushButton(Administrator);
-        Add->setObjectName(QStringLiteral("Add"));
-        Add->setGeometry(QRect(570, 20, 112, 34));
-        Delete = new QPushButton(Administrator);
-        Delete->setObjectName(QStringLiteral("Delete"));
-        Delete->setGeometry(QRect(720, 20, 112, 34));
+        tabWidget = new QTabWidget(Administrator);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setGeometry(QRect(0, 0, 851, 611));
+        tea = new QWidget();
+        tea->setObjectName(QStringLiteral("tea"));
+        table_tea = new QTableWidget(tea);
+        if (table_tea->columnCount() < 4)
+            table_tea->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        table_tea->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        table_tea->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        table_tea->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        table_tea->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        if (table_tea->rowCount() < 6)
+            table_tea->setRowCount(6);
+        table_tea->setObjectName(QStringLiteral("table_tea"));
+        table_tea->setGeometry(QRect(10, 80, 831, 501));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(100);
+        sizePolicy.setVerticalStretch(100);
+        sizePolicy.setHeightForWidth(table_tea->sizePolicy().hasHeightForWidth());
+        table_tea->setSizePolicy(sizePolicy);
+        table_tea->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        table_tea->setShowGrid(true);
+        table_tea->setSortingEnabled(true);
+        table_tea->setRowCount(6);
+        table_tea->setColumnCount(4);
+        table_tea->horizontalHeader()->setCascadingSectionResizes(true);
+        table_tea->horizontalHeader()->setDefaultSectionSize(150);
+        table_tea->horizontalHeader()->setMinimumSectionSize(100);
+        table_tea->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
+        table_tea->horizontalHeader()->setStretchLastSection(true);
+        table_tea->verticalHeader()->setVisible(false);
+        table_tea->verticalHeader()->setCascadingSectionResizes(true);
+        table_tea->verticalHeader()->setDefaultSectionSize(60);
+        table_tea->verticalHeader()->setMinimumSectionSize(50);
+        table_tea->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
+        table_tea->verticalHeader()->setStretchLastSection(true);
+        tea_add = new QPushButton(tea);
+        tea_add->setObjectName(QStringLiteral("tea_add"));
+        tea_add->setGeometry(QRect(680, 20, 112, 34));
+        tea_add->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        tea_refresh = new QPushButton(tea);
+        tea_refresh->setObjectName(QStringLiteral("tea_refresh"));
+        tea_refresh->setGeometry(QRect(340, 20, 112, 34));
+        tea_refresh->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        tea_delete = new QPushButton(tea);
+        tea_delete->setObjectName(QStringLiteral("tea_delete"));
+        tea_delete->setGeometry(QRect(510, 20, 112, 34));
+        tea_delete->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        tabWidget->addTab(tea, QString());
+        stu = new QWidget();
+        stu->setObjectName(QStringLiteral("stu"));
+        table_stu = new QTableWidget(stu);
+        if (table_stu->columnCount() < 3)
+            table_stu->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        table_stu->setHorizontalHeaderItem(0, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        table_stu->setHorizontalHeaderItem(1, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        table_stu->setHorizontalHeaderItem(2, __qtablewidgetitem6);
+        if (table_stu->rowCount() < 6)
+            table_stu->setRowCount(6);
+        table_stu->setObjectName(QStringLiteral("table_stu"));
+        table_stu->setGeometry(QRect(10, 80, 831, 501));
+        sizePolicy.setHeightForWidth(table_stu->sizePolicy().hasHeightForWidth());
+        table_stu->setSizePolicy(sizePolicy);
+        table_stu->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        table_stu->setShowGrid(true);
+        table_stu->setSortingEnabled(true);
+        table_stu->setRowCount(6);
+        table_stu->setColumnCount(3);
+        table_stu->horizontalHeader()->setCascadingSectionResizes(true);
+        table_stu->horizontalHeader()->setDefaultSectionSize(150);
+        table_stu->horizontalHeader()->setMinimumSectionSize(100);
+        table_stu->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
+        table_stu->horizontalHeader()->setStretchLastSection(true);
+        table_stu->verticalHeader()->setVisible(false);
+        table_stu->verticalHeader()->setCascadingSectionResizes(true);
+        table_stu->verticalHeader()->setDefaultSectionSize(60);
+        table_stu->verticalHeader()->setMinimumSectionSize(50);
+        table_stu->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
+        table_stu->verticalHeader()->setStretchLastSection(true);
+        stu_delete = new QPushButton(stu);
+        stu_delete->setObjectName(QStringLiteral("stu_delete"));
+        stu_delete->setGeometry(QRect(510, 20, 112, 34));
+        stu_delete->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        stu_add = new QPushButton(stu);
+        stu_add->setObjectName(QStringLiteral("stu_add"));
+        stu_add->setGeometry(QRect(680, 20, 112, 34));
+        stu_add->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        stu_refresh = new QPushButton(stu);
+        stu_refresh->setObjectName(QStringLiteral("stu_refresh"));
+        stu_refresh->setGeometry(QRect(340, 20, 112, 34));
+        stu_refresh->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
+        tabWidget->addTab(stu, QString());
 
         retranslateUi(Administrator);
+
+        tabWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(Administrator);
     } // setupUi
@@ -50,8 +165,28 @@ public:
     void retranslateUi(QWidget *Administrator)
     {
         Administrator->setWindowTitle(QApplication::translate("Administrator", "Form", Q_NULLPTR));
-        Add->setText(QApplication::translate("Administrator", "\346\267\273\345\212\240", Q_NULLPTR));
-        Delete->setText(QApplication::translate("Administrator", "\345\210\240\351\231\244", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem = table_tea->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("Administrator", "id", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem1 = table_tea->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("Administrator", "name", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem2 = table_tea->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("Administrator", "password", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem3 = table_tea->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("Administrator", "courseID", Q_NULLPTR));
+        tea_add->setText(QApplication::translate("Administrator", "add", Q_NULLPTR));
+        tea_refresh->setText(QApplication::translate("Administrator", "refresh", Q_NULLPTR));
+        tea_delete->setText(QApplication::translate("Administrator", "delete", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tea), QApplication::translate("Administrator", "Teacher", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem4 = table_stu->horizontalHeaderItem(0);
+        ___qtablewidgetitem4->setText(QApplication::translate("Administrator", "id", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem5 = table_stu->horizontalHeaderItem(1);
+        ___qtablewidgetitem5->setText(QApplication::translate("Administrator", "name", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem6 = table_stu->horizontalHeaderItem(2);
+        ___qtablewidgetitem6->setText(QApplication::translate("Administrator", "password", Q_NULLPTR));
+        stu_delete->setText(QApplication::translate("Administrator", "delete", Q_NULLPTR));
+        stu_add->setText(QApplication::translate("Administrator", "add", Q_NULLPTR));
+        stu_refresh->setText(QApplication::translate("Administrator", "refresh", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(stu), QApplication::translate("Administrator", "Student", Q_NULLPTR));
     } // retranslateUi
 
 };

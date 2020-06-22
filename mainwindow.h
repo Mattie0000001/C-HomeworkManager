@@ -41,7 +41,7 @@ private:
 
     QString ID;
     QString password;
-    QString thisuser; // 用户身份（admin/student/teacher）
+    QString thisuser; // 用户身份（"admin"/"student"/"teacher"）
 };
 
 #endif // MAINWINDOW_H
