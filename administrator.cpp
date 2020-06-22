@@ -21,7 +21,8 @@ Administrator::Administrator(QWidget *parent) :
     ui->tableWidget->setAlternatingRowColors(true);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    QString table = "stuManager";
+
+    QString table = "student";
     refresh(table);
 }
 

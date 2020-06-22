@@ -39,29 +39,24 @@ void CreateDb::connectDB() // 连接数据库
 QString CreateDb::select_data(QString table, QString limit_info)
 {
     // 查询准备
-    QSqlQuery query(db);
-    QString select_info = QString("SELECT * FROM %1 WHERE %2").arg(table, limit_info);
-    qDebug() << "select_info" << select_info;
-    query.prepare(select_info);
-    bool ok = query.exec();
+    QString select_sql = QString("select * from %1 where %2").arg(table, limit_info);
+    qDebug() << "select_sql" << select_sql;
+    QSqlQuery query(select_sql);
 
-    if (ok) {
-        // 查询执行
+    QString rec_value;
+
+    // 查询执行
+    while (query.next()) {
         QSqlRecord rec = query.record(); // rec即查询结果
         int rec_index = rec.indexOf("password"); //rec在第几行
-        QString rec_value = query.value(rec_index).toString();
+        rec_value = query.value(rec_index).toString();
 
-        qDebug() << "rec" << rec;
+        qDebug() << "record" << rec;
         qDebug() << "rec_index" << rec_index;
         qDebug() << "rec_value" << rec_value;
-
-        return rec_value;
-    } else {
-       // 查询失败
-       qDebug() << "失败";
-
-       return 0;
     }
+
+    return rec_value;
 }
 
 QList<QStringList> CreateDb::select_all(QString sometable) {  // 从数据库某表读取全部数据

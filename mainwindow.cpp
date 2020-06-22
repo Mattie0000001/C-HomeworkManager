@@ -36,41 +36,36 @@ void MainWindow::on_Btn_login_clicked()
     ID = ui->Input_ID->text();
     password = ui->Input_password->text();
 
-    if (!(ID.isEmpty() || password.isEmpty())) // id和password字段值不为空
-//    if (!ID.isEmpty())
-//    {
-//        // 查询数据库
-//        p_database->connectDB();
-//        QSqlQuery query;
-//        QString checkExist = QString("SELECT * FROM %1 WHERE id= %2").arg(thisuser, ID);
-//        qDebug() << "checkExist" << checkExist;
-//        query.prepare(checkExist);
-//        bool ok = query.exec();
-//        if (ok) {
-//            qDebug() << "查询成功";
-//            QSqlRecord rec = query.record(); // rec即查询结果
-//            int rec_index = rec.indexOf("password"); //rec在第几行
-//            QString rec_value = query.value(rec_index).toString();
-
-//            qDebug() << "rec" << rec;
-//            qDebug() << "rec_index" << rec_index;
-//            qDebug() << "rec_value" << rec_value;
-//            qDebug() << "password" << password;
-
-    {
+    if (ID.isEmpty()) {
+        // id 为空
+        QMessageBox::information(this, "提示", "请输入ID", QMessageBox::Ok);
+    } else if (password.isEmpty()) {
+        // 密码为空
+        QMessageBox::information(this, "提示", "请输入密码", QMessageBox::Ok);
+    } else {
         QString limit_info = QString("id = %1").arg(ID);
+        // 调用函数查询
         QString rec_value = p_database->select_data(thisuser, limit_info);
-        if (rec_value == password) {
+        if (rec_value == NULL) {
+            QMessageBox::information(this, "提示", "查询失败", QMessageBox::Ok);
+        } else if (rec_value == password) {
         // 匹配，登录成功
-            qDebug() << "登陆成功";
+            qDebug() << "----------登陆成功-------------";
             openUI();
         } else {
             QMessageBox::information(this, "提示", "密码错误！", QMessageBox::Ok);
         }
-    } else {
-        QMessageBox::information(this, "提示", "请输入ID和密码", QMessageBox::Ok);
-
     }
+
+    // 这一段都是测试用的
+    qDebug() << "-----------------test------------------------";
+    QString sqll = QString("select * from admin where id = 3");
+    qDebug() << "sql" << sqll;
+    QSqlQuery query(sqll);
+    while (query.next()) {
+        qDebug() <<"" << query.record();
+    }
+    qDebug() << "------------------test-----------------------";
 
 }
 
