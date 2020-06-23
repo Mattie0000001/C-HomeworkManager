@@ -110,9 +110,9 @@ DROP TABLE IF EXISTS `teacher`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teacher` (
   `id` varchar(12) NOT NULL,
-  `courseID` varchar(8) DEFAULT NULL,
   `teaName` varchar(8) DEFAULT NULL,
   `password` varchar(12) DEFAULT NULL,
+  `courseID` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -123,7 +123,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES ('0001','prob01','chen','123456'),('0002','calc01','Liu','123456'),('0003','phy01','huang','123456'),('0004','circ01','ding','123456'),('0005','draw01','wang','123456');
+INSERT INTO `teacher` VALUES ('0001','chen','123456','prob01'),('0002','Liu','123456','calc01'),('0003','huang','123456','phy01'),('0004','ding','123456','circ01'),('0005','wang','123456','draw01');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

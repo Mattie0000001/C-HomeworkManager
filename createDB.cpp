@@ -1,12 +1,3 @@
-#include <QSqlDatabase>
-#include <QDebug>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QSqlQuery>
-#include <QString>
-#include <QSqlDriver>
-#include <QMessageBox>
-
 #include "createDB.h"
 
 CreateDb::CreateDb()
@@ -40,42 +31,12 @@ QString CreateDb::select_data(QString table, QString limit_info)
 {
     // 查询准备
     QString select_sql = QString("select * from %1 where %2").arg(table, limit_info);
-    qDebug() << "select_sql" << select_sql;
-
     QSqlQuery query(select_sql);
 
-    QString rec_value;
-
     // 查询执行
-    while (query.next()) {
-        QSqlRecord rec = query.record(); // rec即查询结果
-        int rec_index = rec.indexOf("password"); //rec在第几列
-        rec_value = query.value(rec_index).toString();
-
-        qDebug() << "record" << rec;
-        qDebug() << "rec_index" << rec_index;
-        qDebug() << "rec_value" << rec_value;
-    }
-
+    query.first();
+    QSqlRecord rec = query.record(); // rec即查询结果
+    int rec_index = rec.indexOf("password"); //rec在第几列
+    QString rec_value = query.value(rec_index).toString();
     return rec_value;
-}
-
-QList<QStringList> CreateDb::select_all(QString sometable) {  // 从数据库某表读取全部数据
-    QString queryString = QString("SELECT * FROM %1").arg(sometable);
-    QSqlQuery query(queryString);
-
-    QList<QStringList> stuInfo;
-
-    while (query.next())
-    {
-        QStringList rowData ;
-
-        rowData <<query.value(1).toString();
-        rowData <<query.value(2).toString();
-        rowData <<query.value(3).toString();
-        rowData <<query.value(4).toString();
-
-        stuInfo.append(rowData);
-    }
-    return stuInfo;
 }

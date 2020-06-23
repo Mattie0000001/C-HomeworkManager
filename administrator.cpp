@@ -1,9 +1,3 @@
-#include <QTableWidget>
-#include <QTableWidgetItem>
-#include <QPushButton>
-#include <QMessageBox>
-#include <QSqlQuery>
-
 #include "administrator.h"
 #include "ui_administrator.h"
 
@@ -12,8 +6,26 @@ Administrator::Administrator(QWidget *parent) :
     ui(new Ui::Administrator)
 {
     ui->setupUi(this);
-    refresh("teacher");
-    refresh("student");
+
+    // 设置表格属性
+    ui->table_stu->setSelectionBehavior(QAbstractItemView::SelectRows);//设置选择模式，选择整行
+    ui->table_tea->setSelectionBehavior(QAbstractItemView::SelectRows);//设置选择模式，选择整行
+    ui->table_stu->setSelectionMode (QAbstractItemView::SingleSelection); //设置选择模式，选择单行
+    ui->table_tea->setSelectionMode (QAbstractItemView::SingleSelection); //设置选择模式，选择单行
+
+    // 表格填充
+    refresh();
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &Administrator::refresh);
+
+    // 修改表格--槽函数连接
+    connect(ui->table_stu, &QTableWidget::itemChanged, this, &Administrator::table_edit);
+    connect(ui->table_tea, &QTableWidget::itemChanged, this, &Administrator::table_edit);
+
+    // 添加信息--槽函数连接
+    p_addstu = new AddStu;
+    p_addtea = new AddTea;
+    connect(p_addstu, &AddStu::thisclose, this, &Administrator::refresh);
+    connect(p_addtea, &AddTea::thisclose, this, &Administrator::refresh);
 }
 
 Administrator::~Administrator()
@@ -21,25 +33,68 @@ Administrator::~Administrator()
     delete ui;
 }
 
+void Administrator::table_edit(QTableWidgetItem *item)
+{
+    // 判断学生还是老师
+    p_tab = ui->tabWidget;
+    int current_tab = p_tab->currentIndex(); //0为老师，1为学生
+    p_table = current_tab ? ui->table_stu : ui->table_tea;
+
+    QString item_changed = item->text(); // 修改后的数据
+
+//    int column = p_table->currentColumn();
+//    int row = p_table->currentRow();
+
+}
+
 void Administrator::delete_account(QString tab)
 {
+    // 判断是老师还是学生
+    p_table = tab == "student" ? ui->table_stu : ui->table_tea;
+
+    qDebug() << p_table;
+
     // 当前行数
-    int row_index = tab == "student" ? ui->table_stu->currentRow() : ui->table_tea->currentRow();
+    int row_index = p_table->currentRow();
+    qDebug() << "row_index" << row_index;
+
+    // 数据库删除
+    // 先禁用外键
+    QString stop_foreign = "SET FOREIGN_KEY_CHECKS = 0";
+    QSqlQuery query(stop_foreign);
+
     if (row_index != -1) {
-        // 数据库删除
-        QString id = ui->table_stu->item(row_index, 0)->text();
-        QString deleteSql = QString("delete from %1 where id = %2").arg(tab, id);
-        QSqlQuery query(deleteSql);
-        // ui删除 (即刷新表格，重新渲染数据)
-        refresh(tab);
+        QString id = p_table->item(row_index, 0)->text();
+        QString delete_sql = QString("delete from %1 where id = %2").arg(tab, id);
+        QSqlQuery query(delete_sql);
+        if (tab == "student") {
+            // 学生有两个表
+            QString delete_stu = QString("delete from homework where id = %2").arg(id);
+            QSqlQuery query(delete_stu);
+        }
+        if (!query.exec()) {
+            qDebug() << "error" << query.lastError().text();
+        }
     } else {
         QMessageBox::information(this, "提示", "请选中数据！", QMessageBox::Ok);
     }
+
+    // ui删除 (即刷新表格，重新渲染数据)
+    refresh();
+
+    // 启用外键
+    QString set_foreign = "SET FOREIGN_KEY_CHECKS = 1";
+    QSqlQuery query_foreign(set_foreign);
 }
 
-void Administrator::refresh(QString tab)
+void Administrator::refresh()
 {
-    QTableWidget *p_table = tab == "student" ? ui->table_stu : ui->table_tea;
+    // 判断老师还是同学
+    p_tab = ui->tabWidget;
+    int current_tab = p_tab->currentIndex(); //0为老师，1为学生
+    p_table = current_tab ? ui->table_stu : ui->table_tea;
+    QString tab = current_tab ? "student" : "teacher";
+
     // 清空当前所有数据
     p_table->clearContents();
 
@@ -61,6 +116,7 @@ void Administrator::refresh(QString tab)
         item_name->setText(name);
         item_password->setText(password);
 
+        p_table->insertRow(row); // 插入一行
         p_table->setItem(row , 0 , item_id);
         p_table->setItem(row , 1 , item_name);
         p_table->setItem(row , 2 , item_password);
@@ -71,8 +127,20 @@ void Administrator::refresh(QString tab)
             item_courseID->setText(courseID);
             p_table->setItem(row, 3, item_courseID);
         }
+
         row++;
     }
+
+//    // 设置表格id字段不可更改
+//    for(int row = 0; row < p_table->rowCount(); row++) {
+//        QTableWidgetItem *item = p_table->item(row, 0); // id这一列
+//        item->setFlags(Qt::NoItemFlags);
+//    }
+}
+
+void Administrator::on_tea_refresh_clicked()
+{
+    refresh();
 }
 
 void Administrator::on_tea_delete_clicked()
@@ -83,28 +151,21 @@ void Administrator::on_tea_delete_clicked()
 void Administrator::on_tea_add_clicked()
 {
     // 弹出addtea弹框
-    p_addtea = new AddTea;
     p_addtea -> show();
-}
-
-void Administrator::on_tea_refresh_clicked()
-{
-    refresh("teacher");
 }
 
 void Administrator::on_stu_refresh_clicked()
 {
-    refresh("student");
+    refresh();
 }
 
 void Administrator::on_stu_delete_clicked()
 {
-    delete_account("teacher");
+    delete_account("student");
 }
 
 void Administrator::on_stu_add_clicked()
 {
     // 弹出 addstu弹框
-    p_addstu = new AddStu;
     p_addstu -> show();
 }

@@ -7,11 +7,15 @@
 
 #include <QSql>
 #include <QList>
-#include <QStringList>
+#include <QDebug>
+#include <QString>
+#include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlRecord>
-#include <QDebug>
 #include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlDriver>
 
 class CreateDb
 {
@@ -21,8 +25,6 @@ public:
     void connectDB(); // 连接数据库
 
     QString select_data(QString table, QString limit_info); // 从指定表中选择限定范围数据
-
-    QList<QStringList> select_all(QString table); // 从指定表里选择全部数据
 
 private:
     QString hostName; // 主机名

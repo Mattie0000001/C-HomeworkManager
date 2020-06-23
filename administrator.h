@@ -5,9 +5,15 @@
 #ifndef ADMINISTRATOR_H
 #define ADMINISTRATOR_H
 
-#include <QWidget>
-#include <QVector>
+#include <Qt>
+#include <QFlags>
+#include <QPushButton>
+#include <QMessageBox>
 #include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QTabWidget>
+#include <QSqlQuery>
+#include <QSqlError>
 
 #include "addstu.h"
 #include "addtea.h"
@@ -29,15 +35,18 @@ public:
 private:
     Ui::Administrator *ui;
 
-    Administrator *p_administrator;
     CreateDb *p_database;
     AddStu *p_addstu;
     AddTea *p_addtea;
 
+    QTableWidget *p_table;
+    QTabWidget *p_tab;
+
 private slots:
     // 数据库有关
     void delete_account(QString); // 删除账户信息
-    void refresh(QString); // 刷新表格数据
+    void refresh(); // 刷新表格数据
+    void table_edit(QTableWidgetItem*); // 修改表格时
 
     // 按钮槽函数
     void on_tea_add_clicked();

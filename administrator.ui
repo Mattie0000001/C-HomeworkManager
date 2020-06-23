@@ -102,6 +102,13 @@
       <property name="text">
        <string>id</string>
       </property>
+      <property name="background">
+       <color>
+        <red>156</red>
+        <green>156</green>
+        <blue>154</blue>
+       </color>
+      </property>
      </column>
      <column>
       <property name="text">

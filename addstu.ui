@@ -97,7 +97,7 @@ color: white;</string>
     <string>cancel</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName">
+  <widget class="QLineEdit" name="name">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -107,7 +107,7 @@ color: white;</string>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuID">
+  <widget class="QLineEdit" name="id">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -143,7 +143,7 @@ color: white;</string>
     <string>Calulus ID</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName_2">
+  <widget class="QLineEdit" name="calc">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -169,7 +169,7 @@ color: white;</string>
     <string>Probability ID</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName_3">
+  <widget class="QLineEdit" name="prob">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -195,7 +195,7 @@ color: white;</string>
     <string>Draw ID</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName_4">
+  <widget class="QLineEdit" name="draw">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -221,7 +221,7 @@ color: white;</string>
     <string>Physics ID</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName_5">
+  <widget class="QLineEdit" name="phy">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -247,7 +247,7 @@ color: white;</string>
     <string>Ciricuit ID</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="stuName_6">
+  <widget class="QLineEdit" name="circ">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -259,8 +259,8 @@ color: white;</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>stuName</tabstop>
-  <tabstop>stuID</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>id</tabstop>
   <tabstop>password</tabstop>
   <tabstop>OK</tabstop>
   <tabstop>Cancel</tabstop>

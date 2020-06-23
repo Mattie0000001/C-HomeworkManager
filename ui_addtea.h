@@ -30,10 +30,10 @@ public:
     QLineEdit *courseID;
     QLineEdit *password;
     QLabel *label;
-    QLineEdit *teaName;
+    QLineEdit *name;
     QLabel *label_2;
     QPushButton *OK;
-    QLineEdit *teaID;
+    QLineEdit *id;
 
     void setupUi(QWidget *AddTea)
     {
@@ -64,9 +64,9 @@ public:
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(140, 80, 111, 51));
         label->setStyleSheet(QStringLiteral("font: 16pt \"Agency FB\";"));
-        teaName = new QLineEdit(AddTea);
-        teaName->setObjectName(QStringLiteral("teaName"));
-        teaName->setGeometry(QRect(320, 80, 301, 41));
+        name = new QLineEdit(AddTea);
+        name->setObjectName(QStringLiteral("name"));
+        name->setGeometry(QRect(320, 80, 301, 41));
         label_2 = new QLabel(AddTea);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(140, 170, 111, 51));
@@ -77,9 +77,9 @@ public:
         OK->setStyleSheet(QLatin1String("border-radius: 10px;\n"
 "background: rgb(0, 0, 127);\n"
 "color: white;"));
-        teaID = new QLineEdit(AddTea);
-        teaID->setObjectName(QStringLiteral("teaID"));
-        teaID->setGeometry(QRect(320, 270, 301, 41));
+        id = new QLineEdit(AddTea);
+        id->setObjectName(QStringLiteral("id"));
+        id->setGeometry(QRect(320, 270, 301, 41));
 
         retranslateUi(AddTea);
 

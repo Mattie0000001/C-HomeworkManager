@@ -50,6 +50,7 @@ public:
         if (table_tea->columnCount() < 4)
             table_tea->setColumnCount(4);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        __qtablewidgetitem->setBackground(QColor(156, 156, 154));
         table_tea->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         table_tea->setHorizontalHeaderItem(1, __qtablewidgetitem1);
