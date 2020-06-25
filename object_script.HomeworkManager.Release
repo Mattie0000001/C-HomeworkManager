@@ -5,8 +5,10 @@ INPUT(
 ./release\createDB.o
 ./release\main.o
 ./release\mainwindow.o
+./release\stu.o
 ./release\moc_addstu.o
 ./release\moc_addtea.o
 ./release\moc_administrator.o
 ./release\moc_mainwindow.o
+./release\moc_stu.o
 );

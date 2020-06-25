@@ -9,6 +9,7 @@
 
 #include "administrator.h"
 #include "createDB.h"
+#include "stu.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,7 @@ public:
     ~MainWindow();
 
 private slots:
+    void open_mainwindow(); // 重新打开
 
     void on_Btn_login_clicked(); // 登录
 
@@ -33,15 +35,16 @@ private slots:
     void on_Radio_admin_clicked(); // 选择管理员身份
 
 private:
-    void openUI(); // 登录成功，打开对应（老师/学生/admin）界面
-private:
     Ui::MainWindow *ui;
     Administrator *p_admin;
     CreateDb *p_database;
+    Stu *p_stu;
 
     QString ID;
     QString password;
     QString thisuser; // 用户身份（"admin"/"student"/"teacher"）
+
+    void openUI(); // 登录成功，打开对应（老师/学生/admin）界面
 };
 
 #endif // MAINWINDOW_H
