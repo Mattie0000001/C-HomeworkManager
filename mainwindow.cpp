@@ -1,11 +1,3 @@
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QCloseEvent>
-#include <QMessageBox>
-#include <QDebug>
-
-#include "createDB.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -17,13 +9,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 连接数据库
     p_database = new CreateDb;
-    p_database->connectDB();
+    p_database->initDB();
 
     // 默认radio选中admin
     ui->Radio_admin->setChecked(true);
     thisuser = "admin";
 
     // 信号与槽 --- student界面与teacher界面关闭时重新弹出登录界面
+    p_stu = new Stu;
     connect(p_stu, &Stu::mainwindow_show, this, &MainWindow::open_mainwindow);
 }
 
@@ -34,6 +27,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::open_mainwindow()
 {
+    qDebug() << "--------connect----------";
     this->show();
 }
 
@@ -68,16 +62,15 @@ void MainWindow::on_Btn_login_clicked()
 
 void MainWindow::openUI () {
     if (thisuser == "admin") {
-        this->close();
+        this->hide();
         p_admin = new Administrator;
         p_admin->show();
     } else if (thisuser == "student") {
-        this->close();
-        p_stu = new Stu;
+        this->hide();
         p_stu->init(ID); // 初始化
         p_stu->show(); //弹出
     } else {
-        this->close();
+        this->hide();
         // teacher 弹出
     }
 }

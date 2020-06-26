@@ -20,7 +20,7 @@ public:
     ~Stu();
 
     //初始化函数
-    void init(QString);   //打开个人界面  改成 初始化界面
+    void init(QString);   //打开个人界面 初始化界面
 private slots:
     void on_infor_backpushButton_clicked();
 //更新保存有关数据
@@ -40,7 +40,6 @@ private slots:
 
 private:
     Ui::Stu *ui;
-
     QString stuid;
 
    //用于保存临时数据的量 因为bool不能直接插入，先用int 代替

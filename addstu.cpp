@@ -40,6 +40,13 @@ void AddStu::on_OK_clicked()
         qDebug() << "student" << query.lastError().text();
     }
 
+    // 计算第几周
+    QDate current_date = p_time.currentDate(); // 当前日期
+    int current_day_of_year = current_date.dayOfYear(); // 今天是今年第几天
+    int init_day_of_year = init_date->dayOfYear(); // 初始日期是今年第几天
+
+    week = (current_day_of_year - init_day_of_year)/7 + 1;
+
     // 向homework表中插入信息
     QString add_hw = QString("insert into homework values ('%1','%2',%3,'%4',0,'%5',0,'%6',0,'%7',0,'%8',0)")
                      .arg(id, name).arg(week).arg(calc_id, prob_id, draw_id, circ_id, phy_id);

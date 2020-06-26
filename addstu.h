@@ -7,6 +7,7 @@
 
 #include <QWidget>
 #include <QDebug>
+#include <QDate>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -41,7 +42,10 @@ private:
     QString draw_id;
     QString phy_id;
     QString circ_id;
-    int week;
+
+    QDate p_time;
+    const QDate *init_date = new QDate(2020, 2, 24); // 设置学期第一天
+    int week = 1;
 
     void get_info();
 

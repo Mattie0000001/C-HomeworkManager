@@ -6,9 +6,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QDebug>
 
-#include "administrator.h"
 #include "createDB.h"
+#include "ui_mainwindow.h"
+#include "administrator.h"
 #include "stu.h"
 
 namespace Ui {

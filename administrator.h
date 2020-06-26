@@ -56,6 +56,9 @@ private slots:
     void on_stu_add_clicked();
     void on_stu_delete_clicked();
     void on_stu_refresh_clicked();
+
+signals:
+    void mainwindow_show();
 };
 
 #endif // ADMINISTRATOR_H

@@ -43,7 +43,7 @@ public:
         Administrator->resize(840, 602);
         tabWidget = new QTabWidget(Administrator);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 0, 851, 611));
+        tabWidget->setGeometry(QRect(0, 0, 851, 1000));
         tea = new QWidget();
         tea->setObjectName(QStringLiteral("tea"));
         table_tea = new QTableWidget(tea);
@@ -157,7 +157,7 @@ public:
 
         retranslateUi(Administrator);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Administrator);
