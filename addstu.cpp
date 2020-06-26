@@ -24,8 +24,11 @@ void AddStu::get_info()
     draw_id = ui->draw->text();
     phy_id = ui->phy->text();
 
-    week = 1;
-    // 等会加一个查询
+    // 计算第几周
+    QDate current_date = p_time.currentDate(); // 当前日期
+    int current_day_of_year = current_date.dayOfYear(); // 今天是今年第几天
+    int init_day_of_year = init_date->dayOfYear(); // 初始日期是今年第几天
+    week = (current_day_of_year - init_day_of_year)/7 + 1;
 }
 
 void AddStu::on_OK_clicked()
@@ -36,16 +39,10 @@ void AddStu::on_OK_clicked()
     QSqlQuery query;
     query.prepare(add_stu);
     bool ok = query.exec();
-    if (!ok) {
+    if (!ok)
+    {
         qDebug() << "student" << query.lastError().text();
     }
-
-    // 计算第几周
-    QDate current_date = p_time.currentDate(); // 当前日期
-    int current_day_of_year = current_date.dayOfYear(); // 今天是今年第几天
-    int init_day_of_year = init_date->dayOfYear(); // 初始日期是今年第几天
-
-    week = (current_day_of_year - init_day_of_year)/7 + 1;
 
     // 向homework表中插入信息
     QString add_hw = QString("insert into homework values ('%1','%2',%3,'%4',0,'%5',0,'%6',0,'%7',0,'%8',0)")
@@ -53,7 +50,8 @@ void AddStu::on_OK_clicked()
     QSqlQuery query2;
     query2.prepare(add_hw);
     bool ok2 = query2.exec();
-    if (!ok2) {
+    if (!ok2)
+    {
         qDebug() << "hw" << query2.lastError().text();
         QMessageBox::information(this, "提示", "插入失败", QMessageBox::Ok);
     }

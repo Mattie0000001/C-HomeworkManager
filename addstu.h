@@ -45,12 +45,12 @@ private:
 
     QDate p_time;
     const QDate *init_date = new QDate(2020, 2, 24); // 设置学期第一天
-    int week = 1;
+    int week = 1; // 第几周
 
-    void get_info();
+    void get_info(); // 获得信息
 
 signals:
-    void thisclose();
+    void thisclose(); // 信号，关闭此窗口
 };
 
 #endif // ADDSTU_H

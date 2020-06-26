@@ -25,8 +25,6 @@ public:
 
     void update_status(); // 判断是否为新的一周，若是，则数据清0
 
-    QString select_data(QString table, QString limit_info); // 从指定表中选择限定范围数据
-
 private:
     QString hostName; // 主机名
     QString dbName; // 数据库名

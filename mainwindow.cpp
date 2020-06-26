@@ -27,49 +27,73 @@ MainWindow::~MainWindow()
 
 void MainWindow::open_mainwindow()
 {
-    qDebug() << "--------connect----------";
     this->show();
 }
 
 void MainWindow::on_Btn_login_clicked()
 {
-    qDebug() << "登录！";
     // 获得id和密码
     ID = ui->Input_ID->text();
     password = ui->Input_password->text();
 
-    if (ID.isEmpty()) {
-        // id 为空
+    // 先判断id 密码是否为空
+    // id 为空
+    if (ID.isEmpty())
+    {
         QMessageBox::information(this, "提示", "请输入ID", QMessageBox::Ok);
-    } else if (password.isEmpty()) {
-        // 密码为空
+    }
+    // 密码为空
+    else if (password.isEmpty())
+    {
         QMessageBox::information(this, "提示", "请输入密码", QMessageBox::Ok);
-    } else {
+    }
+    else
+    {
         QString limit_info = QString("id = %1").arg(ID);
-        // 调用函数查询
-        QString rec_value = p_database->select_data(thisuser, limit_info);
-        if (rec_value == NULL) {
+
+        // 调用database中函数查询
+        // 查询准备
+        QString select_sql = QString("select * from %1 where %2").arg(thisuser, limit_info);
+        QSqlQuery query(select_sql);
+
+        // 查询执行
+        query.first();
+        QSqlRecord rec = query.record(); // rec即查询结果
+        int rec_index = rec.indexOf("password"); //passwork是第几个结果
+        QString rec_value = query.value(rec_index).toString();
+
+        if (rec_value == NULL)
+        {
             QMessageBox::information(this, "提示", "查询失败", QMessageBox::Ok);
-        } else if (rec_value == password) {
+        }
+        else if (rec_value == password)
+        {
         // 匹配，登录成功
             qDebug() << "----------登陆成功-------------";
             openUI();
-        } else {
+        }
+        else
+        {
             QMessageBox::information(this, "提示", "密码错误！", QMessageBox::Ok);
         }
     }
 }
 
 void MainWindow::openUI () {
-    if (thisuser == "admin") {
+    if (thisuser == "admin")
+    {
         this->hide();
         p_admin = new Administrator;
         p_admin->show();
-    } else if (thisuser == "student") {
+    }
+    else if (thisuser == "student")
+    {
         this->hide();
         p_stu->init(ID); // 初始化
         p_stu->show(); //弹出
-    } else {
+    }
+    else
+    {
         this->hide();
         // teacher 弹出
     }

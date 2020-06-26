@@ -20,9 +20,11 @@ void CreateDb::initDB() // 连接数据库
     db.setPassword(password);
     db.setDatabaseName(dbName);
 
-    if (db.open()) {
+    if (db.open())
+    {
         qDebug() << "DB IS OPEN";
-    } else {
+    } else
+    {
         qDebug() << "NOT OPEN :(" << db.lastError().text();
     }
 
@@ -46,38 +48,30 @@ void CreateDb::update_status()
     QSqlQuery query("select week from homework");
 
     // 清0or不清0
-    if (query.exec()) {
+    if (query.exec())
+    {
         query.first();
         int old_week = query.value(0).toInt();
         qDebug() << "old_week" << old_week;
 
-        if (old_week < week) { // 如果是新的一周
-            qDebug() << "---------new week ------";
+        // 如果是新的一周
+        if (old_week < week)
+        {
             // 作业status全部清0,并且更新week的值
             QString update_sql = QString("update homework "
                                      "set calc_status = 0, prob_status = 0, circ_status = 0, "
                                      "draw_status = 0, physics_status = 0, week = %1")
-                                  .arg(week);
+                                     .arg(week);
             QSqlQuery query_update(update_sql);
-            if (!query_update.exec()) {
+
+            if (!query_update.exec())
+            {
                 qDebug() << "error update status" << query.lastError().text();
             }
         }
-    } else {
+    }
+    else
+    {
         qDebug() << "error select" << query.lastError().text();
     }
-}
-
-QString CreateDb::select_data(QString table, QString limit_info)
-{
-    // 查询准备
-    QString select_sql = QString("select * from %1 where %2").arg(table, limit_info);
-    QSqlQuery query(select_sql);
-
-    // 查询执行
-    query.first();
-    QSqlRecord rec = query.record(); // rec即查询结果
-    int rec_index = rec.indexOf("password"); //rec在第几列
-    QString rec_value = query.value(rec_index).toString();
-    return rec_value;
 }

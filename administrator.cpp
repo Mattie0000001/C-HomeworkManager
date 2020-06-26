@@ -17,10 +17,6 @@ Administrator::Administrator(QWidget *parent) :
     refresh();
     connect(ui->tabWidget, &QTabWidget::currentChanged, this, &Administrator::refresh);
 
-    // 修改表格--槽函数连接
-    connect(ui->table_stu, &QTableWidget::itemChanged, this, &Administrator::table_edit);
-    connect(ui->table_tea, &QTableWidget::itemChanged, this, &Administrator::table_edit);
-
     // 添加信息--槽函数连接
     p_addstu = new AddStu;
     p_addtea = new AddTea;
@@ -31,20 +27,6 @@ Administrator::Administrator(QWidget *parent) :
 Administrator::~Administrator()
 {
     delete ui;
-}
-
-void Administrator::table_edit(QTableWidgetItem *item)
-{
-    // 判断学生还是老师
-    p_tab = ui->tabWidget;
-    int current_tab = p_tab->currentIndex(); //0为老师，1为学生
-    p_table = current_tab ? ui->table_stu : ui->table_tea;
-
-    QString item_changed = item->text(); // 修改后的数据
-
-//    int column = p_table->currentColumn();
-//    int row = p_table->currentRow();
-
 }
 
 void Administrator::delete_account(QString tab)
@@ -63,19 +45,25 @@ void Administrator::delete_account(QString tab)
     QString stop_foreign = "SET FOREIGN_KEY_CHECKS = 0";
     QSqlQuery query(stop_foreign);
 
-    if (row_index != -1) {
+    if (row_index != -1)
+    {
         QString id = p_table->item(row_index, 0)->text();
         QString delete_sql = QString("delete from %1 where id = %2").arg(tab, id);
         QSqlQuery query(delete_sql);
-        if (tab == "student") {
+        if (tab == "student")
+        {
             // 学生有两个表
             QString delete_stu = QString("delete from homework where id = %2").arg(id);
             QSqlQuery query(delete_stu);
         }
-        if (!query.exec()) {
+        if (!query.exec())
+        {
             qDebug() << "error" << query.lastError().text();
         }
-    } else {
+    }
+    // 如果没有选中数据
+    else
+    {
         QMessageBox::information(this, "提示", "请选中数据！", QMessageBox::Ok);
     }
 
@@ -103,7 +91,8 @@ void Administrator::refresh()
     QSqlQuery query(sql);
 
     int row = 0;
-    while (query.next()) {
+    while (query.next())
+    {
         QString id = query.value(0).toString();
         QString name = query.value(1).toString();
         QString password = query.value(2).toString();
@@ -121,7 +110,8 @@ void Administrator::refresh()
         p_table->setItem(row , 1 , item_name);
         p_table->setItem(row , 2 , item_password);
 
-        if (tab == "teacher") {
+        if (tab == "teacher")
+        {
             QString courseID = query.value(3).toString();
             QTableWidgetItem *item_courseID = new QTableWidgetItem;
             item_courseID->setText(courseID);
@@ -130,12 +120,6 @@ void Administrator::refresh()
 
         row++;
     }
-
-//    // 设置表格id字段不可更改
-//    for(int row = 0; row < p_table->rowCount(); row++) {
-//        QTableWidgetItem *item = p_table->item(row, 0); // id这一列
-//        item->setFlags(Qt::NoItemFlags);
-//    }
 }
 
 void Administrator::on_tea_refresh_clicked()

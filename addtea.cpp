@@ -30,7 +30,8 @@ void AddTea::on_OK_clicked()
     QSqlQuery query;
     query.prepare(add_tea);
     bool ok = query.exec();
-    if (!ok) {
+    if (!ok)
+    {
         qDebug() << "teacher" << query.lastError().text();
     }
 

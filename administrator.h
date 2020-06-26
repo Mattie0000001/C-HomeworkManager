@@ -46,7 +46,6 @@ private slots:
     // 数据库有关
     void delete_account(QString); // 删除账户信息
     void refresh(); // 刷新表格数据
-    void table_edit(QTableWidgetItem*); // 修改表格时
 
     // 按钮槽函数
     void on_tea_add_clicked();
