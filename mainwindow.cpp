@@ -1,21 +1,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+// 构造函数--初始化ui、打开ui、初始设置
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    // 连接数据库
+// 连接数据库
     p_database = new CreateDb;
     p_database->initDB();
 
-    // 默认radio选中admin
+// 默认radio选中admin
     ui->Radio_admin->setChecked(true);
     thisuser = "admin";
 
-    // 信号与槽 --- student界面与teacher界面关闭时重新弹出登录界面
+// 信号与槽 --- student界面与teacher界面关闭时重新弹出登录界面
     p_stu = new Stu;
     connect(p_stu, &Stu::mainwindow_show, this, &MainWindow::open_mainwindow);
 }
@@ -25,18 +26,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// 槽：重新打开界面
 void MainWindow::open_mainwindow()
 {
     this->show();
 }
 
+// 登录按钮点击
 void MainWindow::on_Btn_login_clicked()
 {
-    // 获得id和密码
+// 获得id和密码
     ID = ui->Input_ID->text();
     password = ui->Input_password->text();
 
-    // 先判断id 密码是否为空
+// 先判断id 密码是否为空
     // id 为空
     if (ID.isEmpty())
     {
@@ -47,8 +50,10 @@ void MainWindow::on_Btn_login_clicked()
     {
         QMessageBox::information(this, "提示", "请输入密码", QMessageBox::Ok);
     }
+    // 都不空
     else
     {
+    // 数据库查询
         QString limit_info = QString("id = %1").arg(ID);
 
         // 调用database中函数查询
@@ -58,8 +63,10 @@ void MainWindow::on_Btn_login_clicked()
 
         // 查询执行
         query.first();
-        QSqlRecord rec = query.record(); // rec即查询结果
-        int rec_index = rec.indexOf("password"); //passwork是第几个结果
+        // rec即查询结果
+        QSqlRecord rec = query.record();
+        // rec_value: passwork是第几个结果
+        int rec_index = rec.indexOf("password");
         QString rec_value = query.value(rec_index).toString();
 
         if (rec_value == NULL)
@@ -69,7 +76,7 @@ void MainWindow::on_Btn_login_clicked()
         else if (rec_value == password)
         {
         // 匹配，登录成功
-            qDebug() << "----------登陆成功-------------";
+            qDebug() << "----------登录成功-------------";
             openUI();
         }
         else
@@ -79,6 +86,7 @@ void MainWindow::on_Btn_login_clicked()
     }
 }
 
+// 登录成功后，根据身份打开不同ui
 void MainWindow::openUI () {
     if (thisuser == "admin")
     {
@@ -89,8 +97,8 @@ void MainWindow::openUI () {
     else if (thisuser == "student")
     {
         this->hide();
-        p_stu->init(ID); // 初始化
-        p_stu->show(); //弹出
+        p_stu->init(ID); // 初始化（把id传值进去）
+        p_stu->show();
     }
     else
     {
