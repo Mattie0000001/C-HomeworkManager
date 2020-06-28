@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 // 信号与槽 --- student界面与teacher界面关闭时重新弹出登录界面
     p_stu = new Stu;
+    p_tea = new tea;
     connect(p_stu, &Stu::mainwindow_show, this, &MainWindow::open_mainwindow);
+    connect(p_tea, &tea::mainwindow_show, this, &MainWindow::open_mainwindow);
 }
 
 MainWindow::~MainWindow()
@@ -103,7 +105,8 @@ void MainWindow::openUI () {
     else
     {
         this->hide();
-        // teacher 弹出
+        p_tea->init2(ID); // 初始化（把id传值进去）
+        p_tea->show();
     }
 }
 

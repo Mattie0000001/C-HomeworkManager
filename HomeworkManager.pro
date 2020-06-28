@@ -25,6 +25,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     stu.cpp \
+    tea.cpp \
 
 HEADERS += \
     addstu.h \
@@ -33,6 +34,7 @@ HEADERS += \
     createDB.h \
     mainwindow.h \
     stu.h \
+    tea.h \
 
 FORMS += \
     addstu.ui \
@@ -40,6 +42,7 @@ FORMS += \
     administrator.ui \
     mainwindow.ui \
     stu.ui \
+    tea.ui \
 
 TRANSLATIONS += \
     HomeworkManager_zh_CN.ts

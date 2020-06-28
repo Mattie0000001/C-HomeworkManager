@@ -18,6 +18,7 @@
 #include "ui_mainwindow.h"
 #include "administrator.h"
 #include "stu.h"
+#include "tea.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +43,7 @@ private:
     Administrator *p_admin; // 指向管理员窗口
     CreateDb *p_database;   // 指向数据库
     Stu *p_stu;             // 指向学生窗口
+    tea *p_tea;             // 指向学生窗口
 
     // 登录所需数据
     QString ID;       // 用户输入的id
