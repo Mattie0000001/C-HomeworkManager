@@ -10,7 +10,7 @@
 #include <QSqlQuery>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <QTabWidget>
+#include <QRegExp>
 
 namespace Ui {
   class tea;
@@ -24,7 +24,7 @@ public:
   explicit tea(QWidget *parent = nullptr);
   ~tea();
   void init2(QString id);
-  void count(QString id);
+  void count(QString);
 
 private slots:
   void on_pushButton_clicked();//返回
@@ -48,11 +48,11 @@ private:
   QString select_sql3;
   QString select_sql2;
   QString select_sql;
-  QString  stuid;
-  QString  stuname;
-  QString  week;
-  QString  subjects;
-  QString  status;
+  QString stuid;
+  QString stuname;
+  QString week;
+  QString subjects;
+  QString status;
   QTableWidget * p_tablestu;
   QTableWidget * p_tablestu2;
   int row2=0,row3=0;

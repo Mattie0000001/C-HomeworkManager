@@ -1,13 +1,5 @@
 ﻿#include "tea.h"
 #include "ui_tea.h"
-#include <QMessageBox>
-#include <QtDebug>
-#include <QSqlError>
-#include <QString>
-#include <QSqlQuery>
-#include <QTableWidget>
-#include <QTableWidgetItem>
-#include <QTabWidget>
 
 tea::tea(QWidget *parent) :
   QWidget(parent),
@@ -25,25 +17,25 @@ tea::~tea()
 void tea::on_pushButton_clicked()//返回
 {
   this->hide();
+  mainwindow_show();
 }
 
 void tea::on_pushButton_2_clicked()//刷新
 {
-
 }
 
 void tea::init2(QString id)
 {
-  teaid=id;
+  teaid =id;
   QString info2 = QString("id  = %1").arg(id);
   QString select_sql = QString("select id, teaName, courseID from %1 where %2").arg("teacher", info2);
-  QSqlQuery query2(select_sql);
-  query2.exec();
-  query2.first();
+  QSqlQuery query(select_sql);
+  query.exec();
+  query.first();
   //查找出来教师信息
-  teaID = query2.value(0).toString();
-  teaName = query2.value(1).toString();
-  courseID = query2.value(2).toString();
+  teaID = query.value(0).toString();
+  teaName = query.value(1).toString();
+  courseID = query.value(2).toString();
 
   //在框里显示
   ui->textEdit->setText(teaID);
@@ -51,61 +43,29 @@ void tea::init2(QString id)
   ui->textEdit_3->setText(courseID);
 
   //查找学生信息
-QString select_sql2;
-if (id=="001")
-{
-      select_sql2 = "select id,stuname,week,prob_id,prob_status from homework";
+  QRegExp rx("([a-z]+)[0-9]+");
+  int pos = rx.indexIn(courseID);
+  if (pos > -1) {
+      subjects = rx.cap(1);
+  }
+  QString select_sql2 = QString("SELECT id,stuname,week,%1_status FROM homework").arg(subjects);
 
-}
+  qDebug() << select_sql2;
+  QSqlQuery query3(select_sql2);
 
- else if(id=="002")
-{
-      select_sql2 = "select id,stuname,week,calc_id,calc_status from homework";
-
-}
-
- else if(id=="003")
-{
-      select_sql2 = "select id,stuname,week,phy_id,phy_status from homework";
-
-}
-
- else if(id=="004")
-{
-      select_sql2 = "select id,stuname,week,circ_id,circ_status from homework";
-
-}
-
-else  if(id=="005")
-{
-      select_sql2 = "select id,stuname,week,draw_id,draw_status from homework";
-
-}
-else
-{
-      qDebug() << "none";
-}
-
-qDebug() << select_sql2;
-QSqlQuery query3(select_sql2);
 //建立表格
 if (query3.exec())
 {
 while (query3.next()) {
-
-    QString  stuid= query3.value(0).toString();
-    QString  stuname= query3.value(1).toString();
-    QString  week= query3.value(2).toString();
-    QString  subjects= query3.value(3).toString();
-    int  status= query3.value(4).toInt();
-    QString status2;
-    if (status) {
-        status2 = "yes";
+    stuid= query3.value(0).toString();
+    stuname= query3.value(1).toString();
+    week = query3.value(2).toString();
+    int  status2 = query3.value(3).toInt();
+    if (status2) {
+        status = "yes";
     } else {
-        status2 = "no";
+        status = "no";
     }
-
-    qDebug() << "student info" << stuid << stuname << week << subjects << status;
 
     QTableWidgetItem *item_stuid = new QTableWidgetItem;
     QTableWidgetItem *item_stuname = new QTableWidgetItem;
@@ -118,7 +78,7 @@ while (query3.next()) {
     item_stuname->setText(stuname);
     item_week->setText(week);
     item_subjects->setText(subjects);
-    item_status->setText(status2);
+    item_status->setText(status);
 
     //建立表格，用上述变量填充表格
     p_tablestu = ui->tableWidget;
@@ -136,51 +96,28 @@ else
 {
     qDebug() << query3.lastError().text();
 }
-count(id);
+    count(subjects);
 }
 
-void tea::count(QString id)
+void tea::count(QString course)
 {
 
-    QString select_sql3;
-  if(id=="001")
-{
-  select_sql3="SELECT prob_status, COUNT(*) FROM homework GROUP BY prob_status";
-}
-
-  else if(id=="002")
-{
-  select_sql3 =  "SELECT calc_status, COUNT(*) FROM homework GROUP BY calc_status";
-}
-
-  else if(id=="003")
-{
-  select_sql3 = "SELECT phy_status, COUNT(*) FROM homework GROUP BY phy_status";
-}
-
-  else if(id=="004")
-{
-  select_sql3= "SELECT circ_status, COUNT(*) FROM homework GROUP BY circ_status";
-}
-
-  else if(id=="005")
-{
-  select_sql3= "SELECT draw_status, COUNT(*) FROM homework GROUP BY draw_status";
-}
-
-QSqlQuery query4(select_sql3);
-query4.exec();
+    QString select_sql3 = QString("SELECT %1_status, COUNT(*) FROM homework GROUP BY %1_status").arg(course);
+    QSqlQuery query4(select_sql3);
+    query4.exec();
 
 while (query4.next()) {
-
     QString  statuses= query4.value(0).toString();
     QString  record= query4.value(1).toString();
-
-    qDebug() << statuses << record;
+    QString status2;
+    if (statuses == "2") {
+        status2 = "yes";
+    } else {
+        status2 = "no";
+    }
 
     QTableWidgetItem *item_statuses = new QTableWidgetItem;
     QTableWidgetItem *item_record= new QTableWidgetItem;
-
 
     //创建特定变量用来给表格赋值
     item_statuses->setText(statuses);
@@ -191,10 +128,5 @@ while (query4.next()) {
     p_tablestu2->insertRow(row3); // 插入一行
     p_tablestu2->setItem(row3 , 0 , item_statuses);
     p_tablestu2->setItem(row3 , 1 , item_record);
-    row3++;
-
+    }
 }
-}
-
-
-

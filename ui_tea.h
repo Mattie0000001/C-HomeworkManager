@@ -40,42 +40,42 @@ public:
     {
         if (tea->objectName().isEmpty())
             tea->setObjectName(QStringLiteral("tea"));
-        tea->resize(550, 354);
+        tea->resize(779, 510);
         pushButton = new QPushButton(tea);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(310, 40, 93, 28));
+        pushButton->setGeometry(QRect(610, 70, 93, 28));
         pushButton_2 = new QPushButton(tea);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(430, 40, 93, 28));
+        pushButton_2->setGeometry(QRect(610, 150, 93, 28));
         label = new QLabel(tea);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(290, 120, 72, 15));
+        label->setGeometry(QRect(440, 290, 72, 15));
         label_2 = new QLabel(tea);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(290, 170, 72, 15));
+        label_2->setGeometry(QRect(440, 340, 72, 15));
         label_3 = new QLabel(tea);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(290, 210, 72, 15));
+        label_3->setGeometry(QRect(440, 380, 72, 15));
         textEdit = new QTextEdit(tea);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(380, 120, 131, 21));
+        textEdit->setGeometry(QRect(530, 290, 131, 21));
         textEdit_2 = new QTextEdit(tea);
         textEdit_2->setObjectName(QStringLiteral("textEdit_2"));
-        textEdit_2->setGeometry(QRect(380, 170, 131, 21));
+        textEdit_2->setGeometry(QRect(530, 340, 131, 21));
         textEdit_3 = new QTextEdit(tea);
         textEdit_3->setObjectName(QStringLiteral("textEdit_3"));
-        textEdit_3->setGeometry(QRect(380, 210, 131, 21));
+        textEdit_3->setGeometry(QRect(530, 380, 131, 21));
         tableWidget = new QTableWidget(tea);
         if (tableWidget->columnCount() < 5)
             tableWidget->setColumnCount(5);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(10, 40, 256, 192));
+        tableWidget->setGeometry(QRect(10, 40, 501, 192));
         tableWidget->setColumnCount(5);
         tableWidget_2 = new QTableWidget(tea);
         if (tableWidget_2->columnCount() < 2)
             tableWidget_2->setColumnCount(2);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        tableWidget_2->setGeometry(QRect(10, 250, 256, 101));
+        tableWidget_2->setGeometry(QRect(10, 250, 211, 171));
         tableWidget_2->setColumnCount(2);
 
         retranslateUi(tea);
