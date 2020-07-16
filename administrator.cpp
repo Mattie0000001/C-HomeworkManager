@@ -173,3 +173,10 @@ void Administrator::on_stu_add_clicked()
     // 弹出 addstu弹框
     p_addstu -> show();
 }
+
+void Administrator::on_stu_back_clicked()
+{
+    // 发射信号
+    this->close();
+    mainwindow_show();
+}

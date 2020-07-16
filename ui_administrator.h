@@ -30,11 +30,13 @@ public:
     QPushButton *tea_add;
     QPushButton *tea_refresh;
     QPushButton *tea_delete;
+    QPushButton *tea_back;
     QWidget *stu;
     QTableWidget *table_stu;
     QPushButton *stu_delete;
     QPushButton *stu_add;
     QPushButton *stu_refresh;
+    QPushButton *stu_back;
 
     void setupUi(QWidget *Administrator)
     {
@@ -101,6 +103,12 @@ public:
         tea_delete->setStyleSheet(QLatin1String("border-radius: 10px;\n"
 "background: rgb(0, 0, 127);\n"
 "color: white;"));
+        tea_back = new QPushButton(tea);
+        tea_back->setObjectName(QStringLiteral("tea_back"));
+        tea_back->setGeometry(QRect(170, 20, 112, 34));
+        tea_back->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
         tabWidget->addTab(tea, QString());
         stu = new QWidget();
         stu->setObjectName(QStringLiteral("stu"));
@@ -153,6 +161,12 @@ public:
         stu_refresh->setStyleSheet(QLatin1String("border-radius: 10px;\n"
 "background: rgb(0, 0, 127);\n"
 "color: white;"));
+        stu_back = new QPushButton(stu);
+        stu_back->setObjectName(QStringLiteral("stu_back"));
+        stu_back->setGeometry(QRect(170, 20, 112, 34));
+        stu_back->setStyleSheet(QLatin1String("border-radius: 10px;\n"
+"background: rgb(0, 0, 127);\n"
+"color: white;"));
         tabWidget->addTab(stu, QString());
 
         retranslateUi(Administrator);
@@ -177,6 +191,7 @@ public:
         tea_add->setText(QApplication::translate("Administrator", "add", Q_NULLPTR));
         tea_refresh->setText(QApplication::translate("Administrator", "refresh", Q_NULLPTR));
         tea_delete->setText(QApplication::translate("Administrator", "delete", Q_NULLPTR));
+        tea_back->setText(QApplication::translate("Administrator", "back", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tea), QApplication::translate("Administrator", "Teacher", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem4 = table_stu->horizontalHeaderItem(0);
         ___qtablewidgetitem4->setText(QApplication::translate("Administrator", "id", Q_NULLPTR));
@@ -187,6 +202,7 @@ public:
         stu_delete->setText(QApplication::translate("Administrator", "delete", Q_NULLPTR));
         stu_add->setText(QApplication::translate("Administrator", "add", Q_NULLPTR));
         stu_refresh->setText(QApplication::translate("Administrator", "refresh", Q_NULLPTR));
+        stu_back->setText(QApplication::translate("Administrator", "back", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(stu), QApplication::translate("Administrator", "Student", Q_NULLPTR));
     } // retranslateUi
 

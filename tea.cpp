@@ -6,6 +6,11 @@ tea::tea(QWidget *parent) :
   ui(new Ui::tea)
 {
   ui->setupUi(this);
+  //打开hwdetail
+  p_detail = new hwdetail;
+  connect(this, &tea::signal_opendetail,this, &tea::slots_opendetail );
+  //从hwdetail返回
+  connect(p_detail, &hwdetail::teacher_show, this, &tea::teacher_open);
 
 }
 
@@ -62,9 +67,9 @@ while (query3.next()) {
     week = query3.value(2).toString();
     int  status2 = query3.value(3).toInt();
     if (status2) {
-        status = "yes";
+        status = "Submitted";
     } else {
-        status = "no";
+        status = "Undone";
     }
 
     QTableWidgetItem *item_stuid = new QTableWidgetItem;
@@ -78,7 +83,6 @@ while (query3.next()) {
     item_stuname->setText(stuname);
     item_week->setText(week);
     item_subjects->setText(subjects);
-    item_status->setText(status);
 
     //建立表格，用上述变量填充表格
     p_tablestu = ui->tableWidget;
@@ -97,6 +101,7 @@ else
     qDebug() << query3.lastError().text();
 }
     count(subjects);
+
 }
 
 void tea::count(QString course)
@@ -111,9 +116,9 @@ while (query4.next()) {
     QString  record= query4.value(1).toString();
     QString status2;
     if (statuses == "2") {
-        status2 = "yes";
+        status2 = "Submitted";
     } else {
-        status2 = "no";
+        status2 = "Undone";
     }
 
     QTableWidgetItem *item_statuses = new QTableWidgetItem;
@@ -129,4 +134,26 @@ while (query4.next()) {
     p_tablestu2->setItem(row3 , 0 , item_statuses);
     p_tablestu2->setItem(row3 , 1 , item_record);
     }
+}
+
+
+void tea::on_pushButton_3_clicked()
+{
+  emit this->signal_opendetail();
+
+}
+
+//查看作业内容的信号函数和槽函数
+void tea::slots_opendetail()
+{
+  p_detail = new hwdetail;
+  p_detail->show_hwdetail(courseID);
+  this->hide();
+  p_detail->show();
+}
+
+//从detail返回teacher
+void tea::teacher_open()
+{
+   this->show();
 }

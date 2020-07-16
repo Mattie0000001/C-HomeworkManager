@@ -16,11 +16,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Radio_admin->setChecked(true);
     thisuser = "admin";
 
-// 信号与槽 --- student界面与teacher界面关闭时重新弹出登录界面
+// 信号与槽 --- administrator、student界面与teacher界面关闭时重新弹出登录界面
+    p_admin = new Administrator;
     p_stu = new Stu;
     p_tea = new tea;
     connect(p_stu, &Stu::mainwindow_show, this, &MainWindow::open_mainwindow);
     connect(p_tea, &tea::mainwindow_show, this, &MainWindow::open_mainwindow);
+    connect(p_admin, &Administrator::mainwindow_show, this, &MainWindow::open_mainwindow);
 }
 
 MainWindow::~MainWindow()
@@ -93,7 +95,6 @@ void MainWindow::openUI () {
     if (thisuser == "admin")
     {
         this->hide();
-        p_admin = new Administrator;
         p_admin->show();
     }
     else if (thisuser == "student")

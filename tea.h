@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "ui_tea.h"
+#include "hwdetail.h"
+#include "createDB.h"
 #include <QMessageBox>
 #include <QtDebug>
 #include <QSqlError>
@@ -16,6 +18,8 @@ namespace Ui {
   class tea;
 }
 
+class hwdetail;
+//先声明一下hwdetail，否则编译会乱
 class tea : public QWidget
 {
   Q_OBJECT
@@ -31,10 +35,16 @@ private slots:
 
   void on_pushButton_2_clicked();//刷新
 
+  void on_pushButton_3_clicked();
+
+  void teacher_open();
+
+  void slots_opendetail();
 
 signals:
   void mainwindow_show();
   void tea_refresh();
+  void signal_opendetail();
 
 
 private:
@@ -57,6 +67,7 @@ private:
   QTableWidget * p_tablestu2;
   int row2=0,row3=0;
 
+  hwdetail *p_detail;
 
 
 };

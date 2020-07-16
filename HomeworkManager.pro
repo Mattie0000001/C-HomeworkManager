@@ -18,34 +18,58 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addhw.cpp \
     addstu.cpp \
     addtea.cpp \
     administrator.cpp \
+    cal.cpp \
+    circuit.cpp \
     createDB.cpp \
+    ed.cpp \
+    hwdetail.cpp \
     main.cpp \
     mainwindow.cpp \
+    physics.cpp \
+    ps.cpp \
     stu.cpp \
     tea.cpp \
+    updatehw.cpp \
 
 HEADERS += \
+    addhw.h \
     addstu.h \
     addtea.h \
     administrator.h \
+    cal.h \
+    circuit.h \
     createDB.h \
+    ed.h \
+    hwdetail.h \
     mainwindow.h \
+    physics.h \
+    ps.h \
     stu.h \
     tea.h \
+    updatehw.h \
 
 FORMS += \
+    addhw.ui \
     addstu.ui \
     addtea.ui \
     administrator.ui \
+    cal.ui \
+    circuit.ui \
+    ed.ui \
+    hwdetail.ui \
     mainwindow.ui \
+    physics.ui \
+    ps.ui \
     stu.ui \
     tea.ui \
+    updatehw.ui \
 
 TRANSLATIONS += \
-    HomeworkManager_zh_CN.ts
+    HomeworkManager_zh_CN.ts \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

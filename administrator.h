@@ -66,5 +66,11 @@ private slots:
     void on_stu_delete_clicked(); // 教师界面 delete 按钮槽函数 -- 删除选中账户
 
     void on_stu_refresh_clicked(); // 教师界面 refresh 按钮槽函数 -- 刷新
+
+    void on_stu_back_clicked(); // 教师界面 back 按钮槽函数 -- 返回登录界面
+
+// 信号
+signals:
+    void mainwindow_show();
 };
 #endif // ADMINISTRATOR_H

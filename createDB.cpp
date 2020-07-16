@@ -72,4 +72,15 @@ void CreateDb::update_status()
     {
         qDebug() << "error select" << query.lastError().text();
     }
+
 }
+
+int CreateDb::get_week()
+{
+    QDate current_date = p_time->currentDate(); // 当前日期
+    int current_day_of_year = current_date.dayOfYear(); // 今天是今年第几天
+    int init_day_of_year = init_date->dayOfYear(); // 初始日期是今年第几天
+    week = (current_day_of_year - init_day_of_year)/7 + 1;
+    return week;
+}
+

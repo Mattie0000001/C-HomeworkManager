@@ -27,6 +27,8 @@ public:
 
     void update_status(); // 判断是否为新的一周，若是，则学生作业状态数据清0
 
+    int get_week(); // 获取当前周数
+
 private:
 // 属性
     QString hostName; // 主机名

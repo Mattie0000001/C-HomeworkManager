@@ -8,34 +8,40 @@
 #include  <time.h>
 #include <QDateTime>
 
-
 Stu::Stu(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::Stu)
 {
     ui->setupUi(this);
+
 }
 
 Stu::~Stu()
 {
     delete ui;
 }
-
-
 void Stu::init(QString id)//需要
 {
     // 姓名
     stuid = id;
     QString info = QString("id = %1").arg(id);
-    QString select_sql = QString("select * from %1 where %2").arg("student", info);
+    QString select_sql = QString("select * from student where %1").arg(info);
     QSqlQuery query1(select_sql);
 
     query1.first();
     QString name = query1.value(1).toString();
     ui->name->setText(name);//将登陆界面显示的姓名显示在文本框内
 
+    QDate current_date = p_time->currentDate(); // 当前日期
+    int current_day_of_year = current_date.dayOfYear(); // 今天是今年第几天
+    int init_day_of_year = init_date->dayOfYear(); // 初始日期是今年第几天
+    time1 = (current_day_of_year - init_day_of_year)/7 + 1;
+    QString week = QString("%1").arg(time1);
+
+    ui->week1->setText(week);
+
     //查询
-    QString select_sql2 = QString("select * from %1 where %2").arg("homework", info);
+    QString select_sql2 = QString("select * from homework where %1").arg(info);
     QSqlQuery query(select_sql2);
 
     //缓存各科目得状态
@@ -105,8 +111,8 @@ void Stu::on_update_clicked()
 {
     QString sql;//和表格名相同
     sql = QString("UPDATE homework "
-                  "set calc_status= %1, prob_status=%2,draw_status=%3,circ_status=%4,physics_status=%5"
-                  " where id = %7")
+                  "set calc_status= %1, prob_status = %2, draw_status = %3, "
+                  "circ_status = %4, phy_status=%5 where id = %6")
                   .arg(cal).arg(PS).arg(ED).arg(circuit).arg(physics).arg(stuid);
     QSqlQuery query;
     bool ok = query.exec(sql);
@@ -186,3 +192,43 @@ void Stu::on_physics_3_clicked()
         physics=0;
     }
 }
+
+void Stu::on_cal_3_clicked()
+{
+    p_cal = new Cal;
+    p_cal->init("calc01");
+    p_cal->show();
+}
+
+void Stu::on_PS_2_clicked()
+{
+    p_ps = new Ps;
+    p_ps->init("prob01");
+    p_ps->show();
+}
+void Stu::on_ED_2_clicked()
+{
+    p_ed = new Ed;
+    p_ed->init("111");
+    p_ed->show();
+
+}
+
+void Stu::on_circuit_2_clicked()
+{
+    p_circuit = new Circuit;
+    p_circuit->init("circ01");
+    p_circuit->show();
+
+}
+
+
+void Stu::on_physics_2_clicked()
+{
+    p_physics = new Physics;
+    p_physics->init("phy01");
+    p_physics->show();
+}
+
+
+
