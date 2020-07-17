@@ -70,6 +70,8 @@ private slots:
     void on_stu_back_clicked(); // 教师界面 back 按钮槽函数 -- 返回登录界面
 
 // 信号
+    void on_tea_back_clicked();
+
 signals:
     void mainwindow_show();
 };

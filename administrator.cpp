@@ -180,3 +180,10 @@ void Administrator::on_stu_back_clicked()
     this->close();
     mainwindow_show();
 }
+
+void Administrator::on_tea_back_clicked()
+{
+    // 发射信号
+    this->close();
+    mainwindow_show();
+}
