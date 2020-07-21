@@ -96,45 +96,78 @@
 ### 文件结构
 
 |—HomeworkManager.pro          // 项目配置文件
+
 |—Headers                                      // 头文件
+
 |   |—mainwindow.h                               登录
+
 |   |—createDB.h                                     数据库初始化、每周更新作业状态
+
 |   |—administrator.h                             管理员
+
 |   |—addstu.h                                         管理员----添加学生账号
+
 |   |—addtea.h                                         管理员----添加教师账号
+
 |   |—stu.h                                                学生
+
 |   |—physics.h                                         物理学科作业具体内容
+
 |   |.....(共五个学科)
+
 |   |—tea.h                                                教师
+
 |   |—hwdetail.h                                      作业具体内容显示、添加、删除、修改
+
 |   |—addhw.h                                          添加作业
+
 |   |—updatehw.h                                    更新作业
+
 |—Source                                         //源文件
+
 |   |—main.cpp                                       主程序
+
 |   |—mainwindow.cpp
+
 |   |—createDB.cpp
+
 |   |....                        
+
 |—Forms                                          //ui文件
+
 |   |—mainwindow.ui
+
 |   |—administrator.ui
+
 |   |......
 
 ### 界面结构
 
 | — 登录界面（mainwindow ）选择管理员/学生/老师身份并登录，成功后调转界面
+
 |     |— 管理员 （administrator）：删除和创建学生/老师账号
+
 |     |     |———学生信息添加（addstu）：创建学生账号（输入学生必要信息）
+
 |     |     |———教师信息添加（addtea）：创建教师账号（输入教师必要信息）
+
 |     |— 学生（student）：查看、修改每科作业的状态；查看作业具体内容
+
 |     |     |———物理（physics）
+
 |     |     |———工图（ed）
+
 |     |     |———电路（circuit）
+
 |     |     |———微积分（cal）
+
 |     |     |———概率论（ps）
+
 |     |— 老师 （teacher）：查看选此课的学生信息、统计学生作业未交人数、发布作业具体内容
+
 |     |     |—作业具体（hwdetail）
+
 |     |     |    |———添加作业（addhw）
+
 |     |     |    |———更新作业（updatehw）
-
-
 
