@@ -38,7 +38,7 @@
 
    将hwmanager.sql文件移至D盘（注：仅供参考，后文的路径根据sql文件的位置相应自行调  整），并在命令行中输入：**source d:/hwmanager.sql;**
 
-3. 将MySQL Server 5.5 / lib / libmysql.dll复制到Qt creator安装目录下的bin目录中（如我的目录是E:\QT\Tools\QtCreator\bin）, 将 MySQL Server 5.5 / lib / libmysql.lib复制到Qt creator安装目录下的lib目录中（如我的目录是E:\QT\Tools\QtCreator\lib）
+3. 将MySQL Server 5.5 / lib / libmysql.dll复制到.. / QT / 5.9.9 / mingw53_32 / bin 下
 
 4.  将createDb.cpp文件中13、14行的username 和 password 改为自己数据库的用户名（一般默认为root）和密码
 
