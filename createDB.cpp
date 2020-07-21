@@ -30,7 +30,6 @@ void CreateDb::initDB()
 
 // 读取系统时间，判断周数，若到新的一周，则清零
     update_status();
-
 }
 
 void CreateDb::update_status()

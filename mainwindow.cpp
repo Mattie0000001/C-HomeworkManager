@@ -76,6 +76,7 @@ void MainWindow::on_Btn_login_clicked()
         if (rec_value == NULL)
         {
             QMessageBox::information(this, "提示", "查询失败", QMessageBox::Ok);
+
         }
         else if (rec_value == password)
         {

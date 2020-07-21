@@ -26,6 +26,8 @@
 
 ### 编译前
 
+**注：如果是可执行文件，只操作第二步即可，顺便最好把自己mysql数据库的用户名和密码改成root 和 123456**
+
 1.  下载相应版本的qt creator 以及 MySQL
 
 2.  数据库导入：
@@ -36,7 +38,7 @@
 
    将hwmanager.sql文件移至D盘（注：仅供参考，后文的路径根据sql文件的位置相应自行调  整），并在命令行中输入：**source d:/hwmanager.sql;**
 
-3.  将MySQL Server 5.5 / lib / libmysql.dll复制到Qt安装目录下的bin目录中, 将 MySQL Server 5.5 / lib / libmysql.lib复制到Qt安装目录下的lib目录中
+3. 将MySQL Server 5.5 / lib / libmysql.dll复制到Qt creator安装目录下的bin目录中（如我的目录是E:\QT\Tools\QtCreator\bin）, 将 MySQL Server 5.5 / lib / libmysql.lib复制到Qt creator安装目录下的lib目录中（如我的目录是E:\QT\Tools\QtCreator\lib）
 
 4.  将createDb.cpp文件中13、14行的username 和 password 改为自己数据库的用户名（一般默认为root）和密码
 
